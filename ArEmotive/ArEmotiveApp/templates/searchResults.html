@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    {% load static %}
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>ArEmotive</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'searchStyle6.css' %}"/>
+</head>
+<body style="background-image:url('../../static/newimg2.png');width:100%;background-size:contain">
+<div class="text-center">
+    <h2>ArEmotive</h2>
+    <p>A corporate recommendation app based on fine-grained emotions in text</p>
+    <p>extended by new Ontologies dynamically</p>
+     <h2>Search results here</h2>
+    <h3>You searched for :</h3>
+    {{query}}
+</div>
+<div class="text-center">
+    <h3>Tweets/Comments found :</h3>
+    {% for element in tweets %}
+    <p>{{element}}</p>
+    {% endfor %}
+
+</div>
+<div class="" name="general-info">
+    <h3>General Information</h3>
+    <ul>
+        <li><p>labels studied : </p></li>
+        {% for item in generalInfo.labelsStudied %}
+        <p style="display:inline-block">{{item}} </p>
+         {% endfor %}
+           <li><p>number of comments/tweets : {{generalInfo.numOfTweets}}</p></li>
+           <li><p>search query source : {{generalInfo.source}}</p></li>
+        <li><p>searched sources : 5 </p></li>
+        <p>ArEmotive Ontology - Secondary Ontology - Bridged Ontologies (new) - Hugging Face classification - DynamOnto</p>
+           <li><p>matching mode : {{generalInfo.matchingMode}} </p></li>
+           <li><p>classification mode : {{generalInfo.classificationMode}} emotional classes to look for in a word</p></li>
+        <li><p>number of all processed words : {{generalInfo.allProcessedWords}}</p></li>
+           <li><p>number of tokens : {{generalInfo.numOfTokens}}</p></li>
+        <li><p>relevant words : {{generalInfo.relevantWords}}</p></li>
+        <li><p>processing time : {{generalInfo.loadingpagetime}} seconds</p></li>
+        <li><p>overlooked words :</p></li>
+
+    </ul>
+</div>
+<hr>
+   <h3>Feature Detection : (fixed)</h3>
+<div id="featureDetection" style="margin-left:20%" class="text-center">
+
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2">features</th>
+        </tr>
+        <tr>
+            <th>tweet</th>
+            <th>feature</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in featureInfo %}
+        <tr>
+            {% for obj in element %}
+            <td>{{obj}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<hr>
+   <h3>Feature Detection : (Dynamic)</h3>
+<div id="featureDetection2" style="margin-left:20%" class="text-center">
+
+    <table>
+        <thead>
+        <tr>
+            <th colspan="2">features</th>
+        </tr>
+        <tr>
+            <th>tweet</th>
+            <th>feature</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for element in topicModeling %}
+        <tr>
+            {% for obj in element %}
+            <td>{{obj}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<hr>
+<div name="recommendations" >
+    <h3>Actions points & Recommendations :</h3>
+
+    <div id="greenRec" style="margin-left:20%">
+     <table id="green" class="text-center" style="display:inline-block;margin-right:20px">
+        <thead>
+        <tr>
+            <th colspan="3" style="background-image: linear-gradient(to right, rgba(0, 150, 0, 1) 0%, rgba(0, 175, 0, 1) 17%, rgba(0, 190, 0, 1) 33%, rgba(82, 210, 82, 1) 67%, rgba(131, 230, 131, 1) 83%, rgba(180, 221, 180, 1) 100%);  /* your gradient */
+  background-repeat: no-repeat;">
+                Green
+            </th>
+        </tr>
+        <tr >
+            <th colspan="3" >
+                you are in the clear
+            </th>
+            </tr>
+        <tr>
+            <th>comment</th>
+            <th>feature</th>
+            <th>polarity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>3</td>
+            <td>الخدمة</td>
+            <td>6</td>
+        </tr>
+        </tbody>
+    </table>
+    <div id="recommendation" class="text-center" style="display:inline-block">
+        <h4>Recommendation :</h4>
+        <h6> For now you are OK</h6>
+        <h6>Try not to fall behind and enhance the features : الخدمة</h6>
+        <h6> emotions found : حب - فخر - سعادة</h6>
+        <h6>keep it up !!</h6>
+    </div>
+    </div>
+    <br>
+    <hr style="width:40%;margin: auto;">
+    <br>
+    <div id="greyRec" style="margin-left:20%">
+    <table id="grey" class="text-center" style="display:inline-block;margin-right:20px">
+          <thead>
+        <tr >
+            <th colspan="3" style="
+background-image: linear-gradient(90deg, rgba(219,185,185,1) 5%, rgba(99,205,74,0.5802520837436538) 58%);background-repeat: no-repeat;">
+                Gray
+            </th>
+        </tr>
+        <tr>
+            <th colspan="3">
+                keep an eye
+            </th>
+            </tr>
+        <tr>
+            <th>comment</th>
+            <th>feature</th>
+            <th>polarity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>4</td>
+            <td>السلام</td>
+            <td>0</td>
+        </tr>
+        </tbody>
+    </table>
+     <div id="recommendation2" class="text-center" style="display:inline-block">
+        <h4>Recommendation :</h4>
+        <h6> Not much right now</h6>
+        <h6>Try keep an eye on the features : السلام</h6>
+        <h6> emotions found : حياد - لا مبالاة</h6>
+        <h6>Don't fall behind and try work on the emotions found</h6>
+    </div>
+    </div>
+    <br>
+    <hr style="width:40%;margin: auto;">
+    <br>
+    <div id="redRec" style="margin-left:20%">
+        <table id="red" class="text-center" style="display:inline-block;margin-right:20px">
+
+          <thead>
+        <tr >
+            <th colspan="3"  style="background-image: linear-gradient(to right, rgba(150, 0, 0, 1) 0%, rgba(175, 0, 0, 1) 17%, rgba(190, 0, 0, 1) 33%, rgba(210, 82, 82, 1) 67%, rgba(230, 131, 131, 1) 83%, rgba(221, 180, 180, 1) 100%);  /* your gradient */
+  background-repeat: no-repeat;">
+                Red
+            </th>
+        </tr >
+        <tr>
+            <th colspan="3">
+                Needs your attention
+            </th>
+            </tr>
+        <tr>
+            <th>comment</th>
+            <th>feature</th>
+            <th>polarity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>النت</td>
+            <td>-5</td>
+        </tr>
+         <tr>
+            <td>2</td>
+            <td>باقة تميز</td>
+            <td>-3</td>
+        </tr>
+        </tbody>
+    </table>
+      <div id="recommendation3" class="text-center" style="display:inline-block">
+        <h4>Recommendation :</h4>
+        <h6> Warning :</h6>
+        <h6>These features require your immediate attention : النت - باقة تميز</h6>
+        <h6> emotions found : حزن - غضب - يأس - لا مبالاة - اشمئزاز - غيظ</h6>
+        <h6>Do your best on these features to achieve some of the following :
+        حب - تفهم - متعة - فرح - اهتمام
+        </h6>
+    </div>
+    </div>
+
+</div>
+<br>
+    <hr>
+<div id="pieChart" name="pieChart">
+    <h3 style="margin-left:10%">Text Polarity</h3>
+      {% for element in wholePolarity %}
+    <h5 style="margin-left:14%">{{element}}</h5>
+    {% endfor %}
+
+     {% autoescape off %}
+             {{pieChart}}
+    {{pieChart2}}
+    {% endautoescape  %}
+</div>
+<div id="emotionalChart" name="emotionalChart">
+    {% autoescape off %}
+        {{chart}}
+
+        {{stackedBar}}
+
+    {{perTweetDiv}}
+    {% endautoescape  %}
+</div>
+<div id="lineChart" name="lineChart">
+    {% autoescape off %}
+        {{lineChart}}
+        {{fineGline}}
+    {% endautoescape  %}
+</div>
+<div id="scatterMap" name="scatterMap">
+    {% autoescape off %}
+        {{scatterMap}}
+        {{fineGMap}}
+    {% endautoescape  %}
+</div>
+<div class="center">
+       <h3>with the emotional classes found :</h3>
+    <ul class="tilesWrap">
+    {% for element in classes %}
+    <li>{{element}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="text-center" id="detailsTable">
+    <h3>details :</h3>
+    <table border="1" style="margin-left:10%;border:solid">
+        <thead class="center">
+            <th style="">word</th>
+            <th>source</th>
+            <th>emotions</th>
+            <th>confidence</th>
+            <th>dialect</th>
+            <th>overall weight</th>
+        </thead>
+        <tbody>
+        {% for obj in sourceDetails %}
+        <tr>
+            <td class="center">{{obj.word}}</td>
+            <td class="center">{{obj.details.sourceName}}</td>
+            <td>
+             {%  for item in obj.details.emotionsMatched %}
+            {{item.emotionsMatchedHere}} <br>
+            {% endfor %}
+            </td>
+            <td class="center">
+                {% for item in obj.details.sourceConfidence %}
+                {{item.confidence}} %
+                {% endfor %}
+            </td>
+            <td class="center">{% for item in obj.details.dialect %}
+                {{item.dialectNode}}
+                {% endfor %}
+                </td>
+            <td class="center">
+                {% for item in obj.details.fullWeight%}
+                {{item.fullWeight}}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="center">
+                قطع الكهربا
+            </td>
+            <td class="center">
+                SecondaryOntology
+            </td>
+            <td class="center">
+                حزن
+                يأس
+            </td>
+            <td class="center">
+                60 %
+            </td>
+            <td class="center">
+                العربية الفصحى
+            </td>
+            <td class="center">
+                -3
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+</div>
+    <hr>
+    <h3 class="center">More detailed :</h3>
+    <h4>found matches in sources :</h4>
+
+    <ul class="tilesWrap">
+        {% for element in sourceDetails %}
+        <li>for word {{element.word}}</li>
+        <li>source name : {{element.details.sourceName}}</li>
+        <li>confidence of this source :</li>
+            <ul >
+            {% for item in element.details.sourceConfidence %}
+            <li>{{item.confidence}} %</li>
+            {% endfor %}
+            </ul>
+        <li>overall emotional weight :</li>
+        <ul>
+            {% for item in element.details.fullWeight %}
+            <li>{{item.fullWeight}}</li>
+            {% endfor %}
+        </ul>
+        <li>detailed emotions :</li>
+        <small><p>partial weights range from -10 to 10 </p>
+        <p >depicting cautionary negative to highly positive </p></small>
+        <ul  >
+            {% for item in element.details.partialWeights %}
+            <li>emotion : {{item.pWeightEmotion}}</li>
+            <li>partial weight : {{item.pWeightWeight}}</li>
+            <p>----------------</p>
+            {% endfor %}
+        </ul>
+        <li>Dialects found from this source :</li>
+            <ul >
+                {% for item in element.details.dialect %}
+                <li>{{item.dialectNode}}</li>
+                {% endfor %}
+            </ul>
+        <li>emotions matched from this source :</li>
+        <ul  >
+            {% for item in element.details.emotionsMatched %}
+        <li>{{item.emotionsMatchedHere}} </li>
+            {% endfor %}
+            </ul>
+        <hr>
+        {% endfor %}
+    </ul>
+    <form>
+        <input type="submit" value="generateReport">
+    </form>
+    <br>
+    <form action="../hello" method="get">
+        <input type="submit" value="homepage">
+    </form>
+</body>
+<style>
+    table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+body::after {
+  content: "";
+background-image:url('../../static/img2.png');
+  width:100%;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+</style>
+</html>

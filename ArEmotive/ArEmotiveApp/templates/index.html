@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>ArEmotive</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'searchStyle.css' %}"/>
+</head>
+<style>
+     body {
+        width : 100%;
+        height : 100%;
+        padding-top:20%;
+        padding-left:20%;
+        margin-left:20%;
+
+}
+   content {
+	 display: flex;
+	 justify-content: vertical;
+	 align-items: vertical;
+	 flex-wrap: nowrap;
+	 overflow: hidden;
+	 flex-direction: column-reverse;
+}
+
+</style>
+<body>
+<div class="content" id="formDiv">
+    <h1>ArEmotive</h1>
+    <h2>bridging the gaps ... </h2>
+<form action="../queryStringFromOntology/" method="post">
+        {% csrf_token %}
+    <div class="search-box">
+
+        <input type="text" id="queryText" placeholder="search ... " name="queryStringFromOntologyInput" required/>
+        <button type="reset"></button>
+        <input type="submit" value="GO!"/>
+        <input type="hidden" name="source" id="test">
+        <input type="hidden" name="numOfTweets">
+        <input type="hidden" name="matchingMode">
+        <input type="hidden" name="classificationMode">
+        <input type="hidden" name="wholeSentenceClassification">
+
+    </div>
+
+
+<div class="content" id="configDiv" style="margin-top:20px">
+
+        <div>
+            <label for="mode">source</label>
+            <select id="mode" name="searchMode">
+                <option value="1">literal search</option>
+                <option value="2">from twitter</option>
+                <option value="3">from file</option>
+            </select>
+        </div>
+        <div>
+            <label for="numOfTweets">number of tweets to get</label>
+            <input id="numOfTweets" name="numOfTweets" type="text" value="1">
+        </div>
+        <div>
+            <label for="matchingMode">matching mode</label>
+            <select id="matchingMode" name="matchingMode">
+                <option value="2">literal</option>
+                 <option value="1">some form of the word</option>
+            </select>
+        </div>
+         <div>
+            <label for="classificationMode">classification mode</label>
+            <details onformdata="classificationMode">how many emotional classes should we look for in a word </details>
+            <input type="text" id="classificationMode" name="classificationMode" value="3">
+        </div>
+            <div>
+                <label for="wholeSentenceClassification">classify sentence as a whole</label>
+                <input type="checkbox" id="wholeSentenceClassification" name="wholeSentenceClassification">
+            </div>
+</div>
+    </form>
+</div>
+<div id="spinner" class="lds-grid">
+
+</div>
+</body>
+<script>
+function checkConfigValues()
+{
+  var configElement = document.getElementById("configDiv");
+  var formElement = document.getElementById("formDiv");
+  console.log(configElement.querySelector('#source').value);
+  formElement.querySelector('input[name="source"]').value = configElement.querySelector('#source').value;
+  console.log(formElement.querySelector('input[name="source"]').value);
+}
+
+</script>
+</html>
